@@ -78,6 +78,20 @@ exports.apigClientFactory.newClient = function (config) {
         defaultAcceptType: config.defaultAcceptType
     };
     var apiGatewayClient = util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.apiGatewayClientFactory.newClient(simpleHttpClientConfig, sigV4ClientConfig);
+    apigClient.accessKeysGet = function (params, body, additionalParams) {
+        if (additionalParams === undefined) {
+            additionalParams = {};
+        }
+        util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        var accessKeysGetRequest = {
+            verb: 'get'.toUpperCase(),
+            path: pathComponent + uritemplate.parse('/access-keys').expand(util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        return apiGatewayClient.makeRequest(accessKeysGetRequest, authType, additionalParams, config.apiKey);
+    };
     apigClient.accessKeysPost = function (params, body, additionalParams) {
         if (additionalParams === undefined) {
             additionalParams = {};
@@ -105,6 +119,34 @@ exports.apigClientFactory.newClient = function (config) {
             body: body
         };
         return apiGatewayClient.makeRequest(accessKeysOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    apigClient.accessKeysIdDelete = function (params, body, additionalParams) {
+        if (additionalParams === undefined) {
+            additionalParams = {};
+        }
+        util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.assertParametersDefined(params, ['id'], ['body']);
+        var accessKeysIdDeleteRequest = {
+            verb: 'delete'.toUpperCase(),
+            path: pathComponent + uritemplate.parse('/access-keys/{id}').expand(util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.parseParametersToObject(params, ['id'])),
+            headers: util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        return apiGatewayClient.makeRequest(accessKeysIdDeleteRequest, authType, additionalParams, config.apiKey);
+    };
+    apigClient.accessKeysIdOptions = function (params, body, additionalParams) {
+        if (additionalParams === undefined) {
+            additionalParams = {};
+        }
+        util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        var accessKeysIdOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate.parse('/access-keys/{id}').expand(util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: util_aws_apigateway_helpers_sdk_libs_1.apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        return apiGatewayClient.makeRequest(accessKeysIdOptionsRequest, authType, additionalParams, config.apiKey);
     };
     apigClient.changePasswordPost = function (params, body, additionalParams) {
         if (additionalParams === undefined) {
